@@ -41,4 +41,6 @@ user:
 
 # 清理輸出檔案
 clean:
-	rm -rf $(OUTPUT_DIR)/*.aux $(OUTPUT_DIR)/*.log $(OUTPUT_DIR)/*.out $(OUTPUT_DIR)/*.pdf $(OUTPUT_DIR)/*.tex
+	# rm -rf $(OUTPUT_DIR)/*.aux $(OUTPUT_DIR)/*.log $(OUTPUT_DIR)/*.out $(OUTPUT_DIR)/*.pdf $(OUTPUT_DIR)/*.tex
+	# rm -rf $(TEMPLATE_DIR)/tmp/
+	find "$(OUTPUT_DIR)" -type f ! -name "*.pdf" -delete

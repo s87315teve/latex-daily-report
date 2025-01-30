@@ -8,6 +8,12 @@
 % \setCJKmainfont{Noto Sans CJK TC} % 使用 Noto Sans CJK TC 作為主要中文字型
 % \setCJKsansfont{Noto Sans CJK TC}
 % \setCJKmonofont{Noto Sans Mono CJK TC}
+% 設定日文字型
+% \setCJKfamilyfont{ja}{Hiragino Sans} % macOS 內建日文字型
+
+% 讓 `\textja{}` 切換成日文字型
+% \newcommand{\textja}[1]{{\CJKfamily{ja}#1}}
+
 
 % 版面設定
 \usepackage[a4paper, margin=2.5cm]{geometry}
@@ -26,6 +32,8 @@
 \usepackage{anyfontsize}
 \usepackage{subcaption}
 \usepackage{color}
+\usepackage{booktabs}
+\usepackage{hyperref}
 
 \title{報告彙整}
 \date{\today}
