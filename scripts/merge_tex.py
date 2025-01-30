@@ -60,7 +60,7 @@ def merge_tex_files(date=None, user=None, output_file="output/main.tex"):
                 else:  # 如果有指定日期，保持原有格式
                     tex_content += extracted_content + "\n\n"
         else:
-            print(f"❌ 找不到 {user} 的報告！")
+            print(f"找不到 {user} 的報告！")
             return
     else:
         for file_name in os.listdir(REPORTS_DIR):
@@ -70,7 +70,15 @@ def merge_tex_files(date=None, user=None, output_file="output/main.tex"):
 
                 extracted_content = extract_sections(file_path, date)
                 if extracted_content:
-                    tex_content += f"\\section{{{user_name}}}\n" + extracted_content + "\n\n"
+                    # 移除原本的日期 section 標題
+                    processed_content = ""
+                    for line in extracted_content.split('\n'):
+                        # 跳過日期 section 標題
+                        if not re.match(r"\\section\{(\d{4}-\d{2}-\d{2})\}", line):
+                            processed_content += line + '\n'
+                    
+                    # 使用使用者名稱作為 section 標題
+                    tex_content += f"\\section{{{user_name}}}\n{processed_content}\n\n"
 
     if not tex_content.strip():
         tex_content = f"\\section{{{user if user else date}}}\n沒有找到符合條件的報告。\n"
@@ -83,7 +91,7 @@ def merge_tex_files(date=None, user=None, output_file="output/main.tex"):
     with open(output_file, "w", encoding="utf-8") as f:
         f.write(final_tex)
 
-    print(f"✅ 生成 {output_file}")
+    print(f"生成 {output_file}")
 
 
 if __name__ == "__main__":
